@@ -1,70 +1,177 @@
-# Getting Started with Create React App
+# OTP Verification System - Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A modern React-based frontend for the OTP verification system that supports both WhatsApp and Email OTP delivery methods.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- **Dual Channel Support**: WhatsApp and Email OTP delivery
+- **Real-time Timer**: 90-second countdown timer for OTP expiration
+- **Smart OTP Input**: Auto-focus and auto-submit functionality
+- **Error Handling**: Comprehensive error handling with user-friendly messages
+- **Responsive Design**: Mobile-friendly interface
+- **Modern UI**: Clean, professional design with animations
+- **Toast Notifications**: Real-time feedback for user actions
 
-### `npm start`
+## Prerequisites
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- Node.js (v14 or higher)
+- npm or yarn
+- Backend server running on port 3000
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Installation
 
-### `npm test`
+1. Install dependencies:
+```bash
+npm install
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+2. Start the development server:
+```bash
+npm start
+```
 
-### `npm run build`
+The application will run on `http://localhost:5000`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Usage
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### 1. Organization Setup
+- Enter your Organization ID in the input field
+- Default Organization ID: `507f1f77bcf86cd799439011`
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### 2. Request OTP
+- Choose between WhatsApp or Email tab
+- Enter phone number (10-15 digits) for WhatsApp
+- Enter email address for Email OTP
+- Click "Send OTP" button
 
-### `npm run eject`
+### 3. Verify OTP
+- Enter the 6-digit OTP code
+- Auto-focus and auto-submit functionality
+- Paste support for OTP codes
+- Real-time validation
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### 4. Features
+- **Timer**: 90-second countdown for OTP expiration
+- **Attempt Tracking**: Shows remaining attempts
+- **Error Handling**: Displays specific error messages
+- **Resend**: Option to resend OTP if needed
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## API Integration
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+The frontend communicates with the backend API endpoints:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- `POST /api/v1/otp/request_otp/whatsapp` - Request WhatsApp OTP
+- `POST /api/v1/otp/request_otp/email` - Request Email OTP
+- `POST /api/v1/otp/verify` - Verify OTP
+- `GET /api/v1/otp/:id/status` - Get OTP status
+- `GET /api/v1/otp/channel/status` - Get channel lock status
 
-## Learn More
+## Error Handling
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+The system handles various error scenarios:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- **Network Errors**: Connection issues with backend
+- **Validation Errors**: Invalid input formats
+- **Rate Limiting**: Channel lock status
+- **OTP Expiration**: Timer-based expiration
+- **Invalid OTP**: Wrong verification attempts
 
-### Code Splitting
+## Components Structure
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```
+src/
+├── components/
+│   ├── Header.js              # Application header
+│   ├── OtpSystem.js           # Main OTP system component
+│   ├── OtpRequestForm.js      # OTP request form
+│   └── OtpVerificationForm.js # OTP verification form
+├── services/
+│   └── api.js                 # API service functions
+└── App.js                     # Main application component
+```
 
-### Analyzing the Bundle Size
+## Styling
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+- Modern CSS with gradient backgrounds
+- Responsive design for mobile devices
+- Smooth animations and transitions
+- Professional color scheme
+- Accessibility-friendly design
 
-### Making a Progressive Web App
+## Development
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### Available Scripts
 
-### Advanced Configuration
+- `npm start` - Start development server on port 5000
+- `npm build` - Build for production
+- `npm test` - Run tests
+- `npm eject` - Eject from Create React App
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### Dependencies
 
-### Deployment
+- `react` - React library
+- `react-dom` - React DOM
+- `react-router-dom` - Routing
+- `axios` - HTTP client
+- `react-hot-toast` - Toast notifications
+- `lucide-react` - Icons
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## Backend Requirements
 
-### `npm run build` fails to minify
+Ensure your backend server is running and configured with:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+1. **CORS**: Enable CORS for `http://localhost:5000`
+2. **Organization**: Valid organization with WhatsApp authentication
+3. **Email Service**: Configured email service for email OTP
+4. **WhatsApp Service**: Authenticated WhatsApp client
+
+## Troubleshooting
+
+### Common Issues
+
+1. **CORS Errors**: Ensure backend has CORS enabled for frontend domain
+2. **API Connection**: Verify backend is running on port 3000
+3. **WhatsApp Errors**: Check if WhatsApp is authenticated for the organization
+4. **Email Errors**: Verify email service configuration
+
+### Debug Mode
+
+Enable debug logging by adding to browser console:
+```javascript
+localStorage.setItem('debug', 'true');
+```
+
+## Security Features
+
+- Input validation on frontend and backend
+- Rate limiting through channel locks
+- Secure OTP generation and verification
+- Session management
+- Error message sanitization
+
+## Performance
+
+- Lazy loading of components
+- Optimized re-renders
+- Efficient state management
+- Minimal bundle size
+- Fast loading times
+
+## Browser Support
+
+- Chrome (recommended)
+- Firefox
+- Safari
+- Edge
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Test thoroughly
+5. Submit a pull request
+
+## License
+
+This project is licensed under the MIT License.
