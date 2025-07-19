@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_BASE_URL = 'http://ec2-13-217-109-77.compute-1.amazonaws.com:3000/api/v1';
+const API_BASE_URL = 'http://ec2-13-217-109-77.compute-1.amazonaws.com/otp-api/api/v1';
 
 // Create axios instance with default config
 const api = axios.create({
